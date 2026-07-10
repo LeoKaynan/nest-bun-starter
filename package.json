@@ -1,11 +1,33 @@
 {
-  "name": "nest",
+  "name": "nest-bun-starter",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "NestJS boilerplate running entirely on Bun, with the native TypeScript 7 compiler, Biome, ES Modules, and a portable single-file binary build.",
+  "author": "LeoKaynan",
+  "license": "MIT",
   "private": true,
-  "license": "UNLICENSED",
   "type": "module",
+  "keywords": [
+    "nestjs",
+    "bun",
+    "typescript",
+    "typescript-7",
+    "biome",
+    "esm",
+    "boilerplate",
+    "starter",
+    "template"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoKaynan/nest-bun-starter.git"
+  },
+  "homepage": "https://github.com/LeoKaynan/nest-bun-starter#readme",
+  "bugs": {
+    "url": "https://github.com/LeoKaynan/nest-bun-starter/issues"
+  },
+  "engines": {
+    "bun": ">=1.3.0"
+  },
   "scripts": {
     "build": "bun run build.ts",
     "typecheck": "tsc --noEmit",
