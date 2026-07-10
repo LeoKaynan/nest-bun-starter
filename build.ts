@@ -23,7 +23,9 @@ async function findUnresolvable(entry: string): Promise<string[]> {
 const entry = './src/main.ts';
 const external = await findUnresolvable(entry);
 if (external.length > 0) {
-  console.log(`externalizing missing optional peer deps: ${external.join(', ')}`);
+  console.log(
+    `externalizing missing optional peer deps: ${external.join(', ')}`,
+  );
 }
 
 await Bun.build({
