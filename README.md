@@ -5,7 +5,7 @@ A ready to use NestJS boilerplate that runs entirely on Bun, with the native Typ
 <p align="center">
   <img src="https://img.shields.io/badge/Bun-1.3-black?logo=bun" alt="Bun" />
   <img src="https://img.shields.io/badge/NestJS-11-e0234e?logo=nestjs" alt="NestJS" />
-  <img src="https://img.shields.io/badge/TypeScript-7.0%20(native)-3178c6?logo=typescript" alt="TypeScript 7" />
+  <img src="https://img.shields.io/badge/TypeScript-7%20(native)-3178c6?logo=typescript" alt="TypeScript 7" />
   <img src="https://img.shields.io/badge/Biome-2.5-60a5fa?logo=biome" alt="Biome" />
   <img src="https://img.shields.io/badge/modules-ESM-f7df1e" alt="ESM" />
 </p>
