@@ -49,6 +49,21 @@ The server runs on `http://localhost:3000`. Set the `PORT` variable if you want 
 | `bun run test:e2e`    | End to end tests                                         |
 | `bun run test:cov`    | Tests with coverage                                      |
 
+## Docker
+
+The image is built in two stages. The first stage compiles the standalone binary with Bun, and the final stage is a distroless image that carries only that binary, so it ships without Node.js and without `node_modules`.
+
+```bash
+docker build -t nest-bun-starter .
+docker run --rm -p 3000:3000 nest-bun-starter
+```
+
+The app answers on `http://localhost:3000`. You can change the port with the `PORT` variable:
+
+```bash
+docker run --rm -p 8080:8080 -e PORT=8080 nest-bun-starter
+```
+
 ## License
 
 [MIT](./LICENSE)
