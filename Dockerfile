@@ -16,7 +16,9 @@ WORKDIR /app
 
 COPY --from=builder --chown=nonroot:nonroot /app/dist/main ./main
 
+ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
 
+USER nonroot
 ENTRYPOINT ["/app/main"]
