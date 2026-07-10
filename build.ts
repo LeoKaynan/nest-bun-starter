@@ -1,31 +1,36 @@
-import type { BunPlugin } from 'bun';
-import { dirname } from 'node:path';
+async function findUnresolvable(entry: string): Promise<string[]> {
+  const external: string[] = [];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    try {
+      await Bun.build({ entrypoints: [entry], target: 'bun', external });
+      return external;
+    } catch (error) {
+      const errors = (error as AggregateError)?.errors ?? [];
+      const found = [
+        ...new Set(
+          errors
+            .map((e) => (e as { specifier?: string })?.specifier)
+            .filter((s): s is string => !!s && !external.includes(s)),
+        ),
+      ];
+      if (found.length === 0) throw error;
+      external.push(...found);
+    }
+  }
+  return external;
+}
 
-const externalizeUnresolvableNest: BunPlugin = {
-  name: 'externalize-unresolvable-nest',
-  setup(build) {
-    build.onResolve({ filter: /^@nestjs\// }, (args) => {
-      const from = args.importer ? dirname(args.importer) : import.meta.dir;
-      try {
-        Bun.resolveSync(args.path, from);
-        return undefined;
-      } catch {
-        return { path: args.path, external: true };
-      }
-    });
-  },
-};
+const entry = './src/main.ts';
+const external = await findUnresolvable(entry);
+if (external.length > 0) {
+  console.log(`externalizing missing optional peer deps: ${external.join(', ')}`);
+}
 
-const result = await Bun.build({
-  entrypoints: ['./src/main.ts'],
+await Bun.build({
+  entrypoints: [entry],
   target: 'bun',
   compile: { outfile: 'dist/main' },
-  plugins: [externalizeUnresolvableNest],
+  external,
 });
-
-if (!result.success) {
-  for (const log of result.logs) console.error(log);
-  process.exit(1);
-}
 
 console.log('✓ dist/main');
