@@ -45,9 +45,9 @@
     "test:e2e": "bun test ./test/app.e2e-spec.ts"
   },
   "dependencies": {
-    "@nestjs/common": "^11.0.1",
-    "@nestjs/core": "^11.0.1",
-    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/common": "^11.1.29",
+    "@nestjs/core": "^11.1.29",
+    "@nestjs/platform-express": "^11.1.29",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
