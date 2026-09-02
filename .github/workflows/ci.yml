@@ -41,3 +41,11 @@ jobs:
 
       - name: Build
         run: bun run build
+
+      - name: Smoke test production binary
+        run: |
+          PORT=3100 ./dist/main &
+          app_pid=$!
+          trap 'kill "$app_pid" 2>/dev/null || true' EXIT
+          curl --retry 10 --retry-delay 1 --retry-connrefused --fail --silent \
+            http://127.0.0.1:3100/ | grep -Fx 'Hello World!'

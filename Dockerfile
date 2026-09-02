@@ -5,9 +5,11 @@ FROM oven/bun:1.4 AS builder
 WORKDIR /app
 
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production --ignore-scripts
 
-COPY . .
+COPY tsconfig.json ./
+COPY build.ts ./
+COPY src ./src
 RUN bun run build
 
 # ---- Runtime stage: minimal image with just the binary ----
